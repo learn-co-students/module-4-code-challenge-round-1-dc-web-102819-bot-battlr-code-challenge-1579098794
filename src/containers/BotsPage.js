@@ -1,6 +1,8 @@
 import React from "react";
 import BotCollection from './BotCollection'
 import BotArmy from './YourBotArmy'
+import {BrowserRouter as Route, Router} from 'react-router-dom'
+import BotSpecs from "../components/BotSpecs";
 
 const botUrl = 'https://bot-battler-api.herokuapp.com/api/v1/bots'
 
@@ -10,7 +12,9 @@ class BotsPage extends React.Component {
     super()
     this.state = {
       allBots: [],
-      myArmy: []
+      myArmy: [],
+      activeBot: {},
+      showView: false
     }
   }
 
@@ -28,13 +32,21 @@ class BotsPage extends React.Component {
     this.setState({myArmy: this.state.myArmy.filter(bot => bot !== selectedBot)})
   }
 
+  toggleViewState = (e, selectedBot) => {
+    this.setState({
+      showView: !this.state.showView,
+      activeBot: selectedBot
+    })
+  } 
+
   filteredBots = () => this.state.allBots.filter(bot => !this.state.myArmy.includes(bot))
 
   render() {
     return (
       <div>
         <BotArmy bots={this.state.myArmy} discharge={this.dischargeBot} />
-        <BotCollection bots={this.filteredBots()} recruit={this.recruitBot} />
+
+        {this.state.showView ? <BotSpecs bot={this.state.activeBot} viewCollection={this.toggleViewState} enlist={this.recruitBot}/> : <BotCollection bots={this.filteredBots()} viewDetails={this.toggleViewState} />}
       </div>
     );
   }
