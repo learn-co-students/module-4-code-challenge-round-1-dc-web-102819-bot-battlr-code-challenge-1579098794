@@ -20,12 +20,21 @@ class BotsPage extends React.Component {
     .then(data => this.setState({allBots: data}))
   }
 
+  recruitBot = (e, bot) => {
+    this.setState({myArmy: [...this.state.myArmy, bot]})
+  }
+
+  dischargeBot = (e, selectedBot) => {
+    this.setState({myArmy: this.state.myArmy.filter(bot => bot !== selectedBot)})
+  }
+
   filteredBots = () => this.state.allBots.filter(bot => !this.state.myArmy.includes(bot))
 
   render() {
     return (
       <div>
-        <BotCollection bots={this.filteredBots()} />
+        <BotArmy bots={this.state.myArmy} discharge={this.dischargeBot} />
+        <BotCollection bots={this.filteredBots()} recruit={this.recruitBot} />
       </div>
     );
   }
