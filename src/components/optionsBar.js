@@ -7,8 +7,6 @@ export default class OptionsBar extends Component {
         const {changeHandler, presentOptions: {searchTerm, botClass}} = this.props
         return (
             <div>
-                <span> 
-
                     <label>Search For Bot by Name</label>
                     <input type='text' name='searchTerm' value={searchTerm} onChange={changeHandler}/>
 
@@ -19,7 +17,6 @@ export default class OptionsBar extends Component {
                         <option value='Assault'>Assault</option>
                         <option value='Support'>Support</option>
                     </select>
-                </span>
             </div>
         )
     }
