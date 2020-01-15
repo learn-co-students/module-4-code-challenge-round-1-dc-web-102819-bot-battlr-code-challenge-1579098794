@@ -66,7 +66,10 @@ const BotSpecs = props => {
             </button>
             <button
               className="ui button fluid"
-              onClick={(e) => {enlist(e, bot); viewCollection(e, {})}}
+              onClick={(e) => {
+                enlist(e, bot); 
+                viewCollection(e, {})
+              }}
             >
               Enlist
             </button>

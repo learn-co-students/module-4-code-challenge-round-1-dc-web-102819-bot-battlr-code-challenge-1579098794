@@ -52,17 +52,26 @@ class BotsPage extends React.Component {
     })
 }
 
-  filteredBots = (botCollection) => botCollection.filter(bot => bot.name.includes(this.state.searchOptions.searchTerm) && (!!this.state.searchOptions.botClass ? bot.bot_class === this.state.searchOptions.botClass : true))
+  filteredBots = (botCollection) => botCollection.filter(bot => bot.name.includes(this.state.searchOptions.searchTerm) && 
+    (!!this.state.searchOptions.botClass ? bot.bot_class === this.state.searchOptions.botClass : true))
   
   noArmyFilter = () => this.filteredBots(this.state.allBots.filter(bot => !this.state.myArmy.includes(bot)))
   
   render() {
     return (
       <div>
-        <OptionsBar changeHandler={this.changeHandler} presentOptions={this.state.searchOptions}/>
-        <BotArmy bots={this.filteredBots(this.state.myArmy)} discharge={this.dischargeBot} />
+        <OptionsBar changeHandler={this.changeHandler} 
+          presentOptions={this.state.searchOptions}/>
+        <BotArmy bots={this.filteredBots(this.state.myArmy)} 
+          discharge={this.dischargeBot} />
 
-        {this.state.showView ? <BotSpecs bot={this.state.activeBot} viewCollection={this.toggleViewState} enlist={this.recruitBot}/> : <BotCollection bots={this.noArmyFilter()} viewDetails={this.toggleViewState} />}
+        {this.state.showView ? 
+          <BotSpecs bot={this.state.activeBot} 
+            viewCollection={this.toggleViewState} 
+            enlist={this.recruitBot}/>
+          : 
+          <BotCollection bots={this.noArmyFilter()} 
+            viewDetails={this.toggleViewState} />}
       </div>
     );
   }
